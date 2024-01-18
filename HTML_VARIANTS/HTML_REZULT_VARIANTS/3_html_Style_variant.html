@@ -1,0 +1,209 @@
+<!-- <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+  
+    h2 {
+      color: #fff;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+  
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+  
+    li {
+      background-color: #333;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    li:nth-child(even) {
+      background-color: #444;
+    }
+  
+    li:hover {
+      background-color: #555;
+    }
+  
+    .group-label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+  
+    .group-number {
+      font-weight: bold;
+      margin-right: 10px;
+      color: #4CAF50; /* Цвет для номера команды (можете настроить по своему вкусу) */
+    }
+  
+    .background {
+      background: linear-gradient(to bottom, #222, #111); /* Градиентный фон */
+      padding: 20px;
+    }
+  </style>
+  
+  <div class="background">
+    <h2>Результаты:</h2>
+    <ul>
+      {% for group in command_result %}
+        <li>
+          <span class="group-number">{{ forloop.counter }} команда:</span>
+          <span>{{ group|join:', ' }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </div> -->
+
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Пример</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    h2 {
+      color: #fff;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: #333;
+      padding: 15px;
+      padding-right: 100px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    li:nth-child(even) {
+      background-color: #444;
+    }
+
+    li:hover {
+      background-color: #555;
+    }
+
+    .group-label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .group-number {
+      font-weight: bold;
+      margin-right: 10px;
+      color: #4CAF50; /* Цвет для номера команды (можете настроить по своему вкусу) */
+    }
+
+    .background {
+      background: linear-gradient(to bottom, #222, #111); /* Градиентный фон */
+      padding: 20px;
+    }
+
+    /* Дополнительные стили для кнопок */
+    .btn-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      cursor: pointer;
+      padding: 5px 10px;
+      margin-right: 5px;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+    }
+
+    .btn-green,
+    .btn-red {
+      display: inline-block;
+    }
+
+    .btn-green {
+      background-color: #4CAF50;
+    }
+
+    .btn-red {
+      background-color: #f44336;
+    }
+
+    .btn-back {
+      background-color: #2196F3;
+      display: none;
+    }
+
+    .green li {
+      background-color: #00ff00;
+    }
+
+    .red li {
+      background-color: #f44336;
+    }
+  </style>
+</head>
+<body>
+  <div class="background">
+    <h2>Результаты:</h2>
+    <ul>
+      {% for group in command_result %}
+        <div class="btn-group" id="group{{ forloop.counter }}">
+          <!-- Добавленные кнопки слева от группы -->
+          <button class="btn btn-green" onclick="setStatus('group{{ forloop.counter }}', 'green')">✔</button>
+          <button class="btn btn-red" onclick="setStatus('group{{ forloop.counter }}', 'red')">✘</button>
+          <button class="btn btn-back" onclick="resetStatus('group{{ forloop.counter }}')">←</button>
+          <li class="group-item">
+            <span class="group-number">{{ forloop.counter }} команда:</span>
+            <span>{{ group|join:', ' }}</span>
+          </li>
+        </div>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <script>
+    function setStatus(groupId, status) {
+      var groupElement = document.getElementById(groupId);
+      groupElement.classList.remove('green', 'red');
+      groupElement.classList.add(status);
+      document.querySelector('#' + groupId + ' .btn-back').style.display = 'inline-block';
+      document.querySelector('#' + groupId + ' .btn-green').style.display = 'none';
+      document.querySelector('#' + groupId + ' .btn-red').style.display = 'none';
+    }
+
+    function resetStatus(groupId) {
+      var groupElement = document.getElementById(groupId);
+      groupElement.classList.remove('green', 'red');
+      document.querySelector('#' + groupId + ' .btn-back').style.display = 'none';
+      document.querySelector('#' + groupId + ' .btn-green').style.display = 'inline-block';
+      document.querySelector('#' + groupId + ' .btn-red').style.display = 'inline-block';
+    }
+  </script>
+</body>
+</html>

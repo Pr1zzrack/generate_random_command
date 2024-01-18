@@ -1,0 +1,311 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    form {
+      width: 300px;
+      margin: 20px auto;
+      background-color: #333;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    #participants {
+      margin-bottom: 10px;
+    }
+
+    button {
+      cursor: pointer;
+      margin-bottom: 10px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #settings {
+      display: none;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      background-color: #444;
+      border: 1px solid #666;
+      color: #fff;
+      border-radius: 5px;
+    }
+
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      padding: 10px;
+      background-color: #333;
+    }
+
+    .footer a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <form method="post" action="{% url 'randomizer' %}">
+    {% csrf_token %}
+
+    <div id="participants">
+      <label for="inp_name">Введите имя участника:</label>
+      <input type="text" name="inp_name[]" required>
+    </div>
+
+    <button type="button" onclick="addParticipant()">Добавить еще участника</button>
+
+    <div id="settings" style="display:none;">
+      <label for="inp_count_command">Введите количество участников в одной команде:</label>
+      <input type="number" name="inp_count_command" required>
+      <button type="submit">Далее</button>
+    </div>
+
+    <script>
+      let participantIndex = 1;
+
+      function addParticipant() {
+        const participantsDiv = document.getElementById('participants');
+        const newInput = document.createElement('input');
+        newInput.type = 'text';
+        newInput.name = 'inp_name[]';
+        newInput.required = true;
+        participantsDiv.appendChild(document.createElement('br'));
+        participantsDiv.appendChild(newInput);
+        participantIndex++;
+
+        if (participantIndex > 1) {
+          document.getElementById('settings').style.display = 'block';
+        }
+      }
+    </script>
+  </form>
+
+  <div class="footer">
+    <p>My GitHub: <a href="https://github.com/Pr1zzrack" target="_blank">Pr1zzrack</a></p>
+  </div>
+
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* ваш стиль остается неизменным */
+
+    .error-message {
+      color: red;
+      margin-top: 5px;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    form {
+      width: 300px;
+      margin: 20px auto;
+      background-color: #333;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    #participants {
+      margin-bottom: 10px;
+    }
+
+    button {
+      cursor: pointer;
+      margin-bottom: 10px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #settings {
+      display: none;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      background-color: #444;
+      border: 1px solid #666;
+      color: #fff;
+      border-radius: 5px;
+    }
+
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      padding: 10px;
+      background-color: #333;
+    }
+
+    .footer a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <form method="post" action="{% url 'randomizer' %}">
+    {% csrf_token %}
+
+    <div id="participants">
+      <label for="inp_name">Введите имя участника:</label>
+      <input type="text" name="inp_name[]" required>
+      <span class="error-message" id="name-error"></span>
+    </div>
+
+    <button type="button" onclick="addParticipant()">Добавить еще участника</button>
+
+    <div id="settings" style="display:none;">
+      <label for="inp_count_command">Введите количество участников в одной команде:</label>
+      <input type="number" name="inp_count_command" required>
+      <button type="submit">Далее</button>
+    </div>
+
+    <script>
+      let participantIndex = 1;
+
+      function addParticipant() {
+        const participantsDiv = document.getElementById('participants');
+        const newInput = document.createElement('input');
+        newInput.type = 'text';
+        newInput.name = 'inp_name[]';
+        newInput.required = true;
+        const errorSpan = document.createElement('span');
+        errorSpan.className = 'error-message';
+        errorSpan.id = `name-error-${participantIndex}`;
+        participantsDiv.appendChild(document.createElement('br'));
+        participantsDiv.appendChild(newInput);
+        participantsDiv.appendChild(errorSpan);
+        participantIndex++;
+
+        if (participantIndex > 1) {
+          document.getElementById('settings').style.display = 'block';
+        }
+      }
+
+      // Проверка уникальности введенных имен
+      function isNameUnique() {
+        const names = document.getElementsByName('inp_name[]');
+        const errorMessages = document.getElementsByClassName('error-message');
+
+        let isUnique = true;
+
+        for (let i = 0; i < names.length; i++) {
+          for (let j = i + 1; j < names.length; j++) {
+            if (names[i].value === names[j].value) {
+              errorMessages[i].innerText = 'Имя должно быть уникальным';
+              errorMessages[j].innerText = 'Имя должно быть уникальным';
+              isUnique = false;
+            } else {
+              errorMessages[i].innerText = '';
+              errorMessages[j].innerText = '';
+            }
+          }
+        }
+
+        return isUnique;
+      }
+
+      // Добавление обработчика событий для проверки уникальности перед отправкой формы
+      document.querySelector('form').addEventListener('submit', function(event) {
+        if (!isNameUnique()) {
+          event.preventDefault();
+        }
+      });
+    </script>
+  </form>
+
+  <div class="footer">
+    <p>My GitHub: <a href="https://github.com/Aktan-SSS" target="_blank">Aktan-SSS</a></p>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+  
+    h2 {
+      color: #fff;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+  
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+  
+    li {
+      background-color: #333;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    li:nth-child(even) {
+      background-color: #444;
+    }
+  
+    li:hover {
+      background-color: #555;
+    }
+  
+    .group-label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+  
+    .group-number {
+      font-weight: bold;
+      margin-right: 10px;
+      color: #4CAF50; /* Цвет для номера команды (можете настроить по своему вкусу) */
+    }
+  
+    .background {
+      background: linear-gradient(to bottom, #222, #111); /* Градиентный фон */
+      padding: 20px;
+    }
+  </style>
+  
+  <div class="background">
+    <h2>Результаты:</h2>
+    <ul>
+      {% for group in command_result %}
+        <li>
+          <span class="group-number">{{ forloop.counter }} команда:</span>
+          <span>{{ group|join:', ' }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>

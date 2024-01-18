@@ -1,0 +1,30 @@
+<style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+  
+    .background {
+      background: linear-gradient(to bottom, #222, #111);
+      padding: 20px;
+      text-align: center;
+    }
+  
+    h2 {
+      color: #4CAF50;
+      font-size: 44px;
+      margin-bottom: 10px;
+    }
+  
+    p {
+      color: #4CAF50;
+      font-size: 18px;
+    }
+  </style>
+  
+  <div class="background">
+    <h2>Ошибка:</h2>
+    <p>{{ message }}</p>
+    <a href="{% url 'randomizer' %}">← Вернуться на страницу добавления участника</a>
+</div>
